@@ -1,3 +1,4 @@
 ### Backend_Campus
-before used this app
--npm init, npm i -g nodemon, npm i
+ - the first clone or download this repositories
+ - npm init and npm i 
+ - happy for u wkwk
