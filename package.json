@@ -13,5 +13,14 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "mysql": "^2.17.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/setiawan19/Backend_Campus.git"
+  },
+  "bugs": {
+    "url": "https://github.com/setiawan19/Backend_Campus/issues"
+  },
+  "homepage": "https://github.com/setiawan19/Backend_Campus#readme"
 }
