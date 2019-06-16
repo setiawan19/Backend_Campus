@@ -426,40 +426,40 @@ app.post("/view_sks/add/:nim", (req, res) => {
     target_wisuda: req.body.target_wisuda
   };
 
-  var sks_exist = `SELECT * FROM sks WHERE nim = ${req.params.nim}`;
-  var semesterX, nimX;
-  db.query(sks_exist, (err1, res1) => {
-    res.send({
-      nimX: sks_exist.nim,
-      semesterX: sks_exist.semester
-    });
+  // var sks_exist = `SELECT * FROM sks WHERE nim = ${req.params.nim}`;
+  // var semesterX, nimX;
+  // db.query(sks_exist, (err1, res1) => {
+  //   res.send({
+  //     nimX: sks_exist.nim,
+  //     semesterX: sks_exist.semester
+  //   });
+  // });
+  // if (data.semester != semesterX && data.nim == nimX) {
+  var sql = `INSERT INTO sks SET ?`;
+  db.query(sql, data, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send({
+        status: `Data SKS Lulus Semester ${
+          req.body.semester
+        } Berhasil Ditambahkan`,
+        nim: req.body.nim,
+        sks_lulus: req.body.sks_lulus,
+        ips: req.body.ips,
+        ipk: req.body.ipk,
+        semester: req.body.semester,
+        tahun: req.body.tahun,
+        sisa_sks: req.body.sisa_sks,
+        target_wisuda: req.body.target_wisuda
+      });
+    }
   });
-  if (data.semester != semesterX && data.nim == nimX) {
-    var sql = `INSERT INTO sks SET ?`;
-    db.query(sql, data, (err, result) => {
-      if (err) {
-        throw err;
-      } else {
-        res.send({
-          status: `Data SKS Lulus Semester ${
-            req.body.semester
-          } Berhasil Ditambahkan`,
-          nim: req.body.nim,
-          sks_lulus: req.body.sks_lulus,
-          ips: req.body.ips,
-          ipk: req.body.ipk,
-          semester: req.body.semester,
-          tahun: req.body.tahun,
-          sisa_sks: req.body.sisa_sks,
-          target_wisuda: req.body.target_wisuda
-        });
-      }
-    });
-  } else {
-    res.send({
-      status: `Data yang anda input salah`
-    });
-  }
+  // } else {
+  //   res.send({
+  //     status: `Data yang anda input salah`
+  //   });
+  // }
 });
 
 //update data prediksi sks mahasiswa by nim
