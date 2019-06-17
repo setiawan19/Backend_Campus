@@ -367,7 +367,8 @@ app.get("/view_sks", (req, res) => {
                 FROM sks, mahasiswa JOIN prodi, fakultas
                 WHERE sks.nim = mahasiswa.nim 
                 AND mahasiswa.id_prodi = prodi.id
-                AND prodi.id_fk = fakultas.id`;
+                AND prodi.id_fk = fakultas.id
+                `;
   db.query(sql, (err, result) => {
     if (err) {
       throw err;
@@ -388,6 +389,19 @@ app.get("/view_sks/:nim", (req, res) => {
                 AND sks.nim = mahasiswa.nim
                 AND mahasiswa.id_prodi = prodi.id
                 AND prodi.id_fk = fakultas.id`;
+  db.query(sql, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(result);
+    }
+  });
+});
+//select value column if semester value max
+app.get("/semester/:nim", (req, res) => {
+  var sql = `SELECT * from sks WHERE sks.nim = ${
+    req.params.nim
+  } ORDER BY semester DESC LIMIT 1`;
   db.query(sql, (err, result) => {
     if (err) {
       throw err;
