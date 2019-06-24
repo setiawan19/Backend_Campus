@@ -363,7 +363,7 @@ app.get("/prodifk", (req, res) => {
 app.get("/view_sks", (req, res) => {
   var sql = `SELECT sks.nim, mahasiswa.nama AS nama,
                 prodi.nama AS prodi, fakultas.nama AS fk,
-                prodi.total_sks AS total_sks, sks.sks_lulus, ips, ipk
+                prodi.total_sks AS total_sks, sks.ipk
                 FROM sks, mahasiswa JOIN prodi, fakultas
                 WHERE sks.nim = mahasiswa.nim 
                 AND mahasiswa.id_prodi = prodi.id
@@ -397,6 +397,7 @@ app.get("/view_sks/:nim", (req, res) => {
     }
   });
 });
+
 //select value column if semester value max
 app.get("/semester/:nim", (req, res) => {
   var sql = `SELECT * from sks WHERE sks.nim = ${
@@ -422,7 +423,14 @@ app.post("/view_sks", (req, res) => {
     } else {
       res.send({
         status: `Data Mahasiswa Berhasil ditambahkan ke Prediksi Kelulusan`,
-        nim: req.body.nim
+        nim: req.body.nim,
+        sks_lulus: req.body.sks_lulus,
+        ips: req.body.ips,
+        ipk: req.body.ipk,
+        semester: req.body.semester,
+        tahun: req.body.tahun,
+        sisa_sks: req.body.sisa_sks,
+        target_wisuda: req.body.target_wisuda
       });
     }
   });
