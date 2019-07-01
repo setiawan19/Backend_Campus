@@ -18,6 +18,57 @@ db.connect(() => {
   // db.end()
 });
 
+//======= dashboard =============
+//admin count
+app.get("/dash_admin", (req, res) => {
+  var ambildata = `SELECT COUNT(*) FROM user`;
+  db.query(ambildata, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(result);
+      //console.log(result);
+    }
+  });
+});
+//mahasiswa count
+app.get("/dash_mhs", (req, res) => {
+  var ambildata = `SELECT COUNT(*) FROM mahasiswa`;
+  db.query(ambildata, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(result);
+      //console.log(result);
+    }
+  });
+});
+//fakultas count
+app.get("/dash_fk", (req, res) => {
+  var ambildata = `SELECT COUNT(*) FROM fakultas`;
+  db.query(ambildata, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(result);
+      //console.log(result);
+    }
+  });
+});
+//prodi count
+app.get("/dash_pr", (req, res) => {
+  var ambildata = `SELECT COUNT(*) FROM prodi`;
+  db.query(ambildata, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(result);
+      //console.log(result);
+    }
+  });
+});
+//===============================
+
 //ambil all data admin
 app.get("/admin", (req, res) => {
   var ambildata = `SELECT * FROM user`;
@@ -414,7 +465,14 @@ app.get("/semester/:nim", (req, res) => {
 //insert/add data mahasiswa ke daftar prediksi sks
 app.post("/view_sks", (req, res) => {
   var data = {
-    nim: req.body.nim
+    nim: req.body.nim,
+    sks_lulus: req.body.sks_lulus,
+    ips: req.body.ips,
+    ipk: req.body.ipk,
+    semester: req.body.semester,
+    tahun: req.body.tahun,
+    sisa_sks: req.body.sisa_sks,
+    target_wisuda: req.body.target_wisuda
   };
   var sql = `INSERT INTO sks SET ?`;
   db.query(sql, data, (err, result) => {
@@ -435,6 +493,7 @@ app.post("/view_sks", (req, res) => {
     }
   });
 });
+
 //insert sks lulus mahasiswa tiap semester
 app.post("/view_sks/add/:nim", (req, res) => {
   var data = {
@@ -448,15 +507,6 @@ app.post("/view_sks/add/:nim", (req, res) => {
     target_wisuda: req.body.target_wisuda
   };
 
-  // var sks_exist = `SELECT * FROM sks WHERE nim = ${req.params.nim}`;
-  // var semesterX, nimX;
-  // db.query(sks_exist, (err1, res1) => {
-  //   res.send({
-  //     nimX: sks_exist.nim,
-  //     semesterX: sks_exist.semester
-  //   });
-  // });
-  // if (data.semester != semesterX && data.nim == nimX) {
   var sql = `INSERT INTO sks SET ?`;
   db.query(sql, data, (err, result) => {
     if (err) {
@@ -477,11 +527,6 @@ app.post("/view_sks/add/:nim", (req, res) => {
       });
     }
   });
-  // } else {
-  //   res.send({
-  //     status: `Data yang anda input salah`
-  //   });
-  // }
 });
 
 //update data prediksi sks mahasiswa by nim
