@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2019 at 04:39 AM
+-- Generation Time: Jul 06, 2019 at 08:18 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -122,9 +122,13 @@ CREATE TABLE `sks` (
 --
 
 INSERT INTO `sks` (`id`, `nim`, `sks_lulus`, `ips`, `ipk`, `semester`, `tahun`, `sisa_sks`, `target_wisuda`) VALUES
-(2, 20191011, 24, 4, 4, 1, 2018, 120, '7 semester'),
-(6, 20191055, 24, 4, 4, 8, 2018, 100, 'gak tau'),
-(7, 20191011, 24, 4, 4, 2, 2019, 96, '6 semester');
+(2, 20191011, 24, 4, 4, 1, 2018, 106, '5 semester'),
+(52, 20191011, 24, 3.54, 3.77, 2, 2019, 82, 'Target Wisuda 4 Semester lagi'),
+(53, 20191011, 10, 1.59, 3.04, 3, 2019, 72, 'Target Wisuda 4 Semester lagi'),
+(54, 20191011, 23, 3.45, 3.15, 4, 2019, 49, 'Target Wisuda 3 Semester lagi'),
+(55, 20191055, 24, 4, 4, 1, 2019, 116, 'Target Wisuda 5 Semester lagi'),
+(56, 20191011, 24, 3.25, 3.17, 5, 2019, 25, 'Target Wisuda 2 Semester lagi'),
+(57, 20191011, 25, 4, 3.31, 6, 2019, 0, 'Selamat Anda Lulus');
 
 -- --------------------------------------------------------
 
@@ -198,7 +202,7 @@ ALTER TABLE `prodi`
 -- AUTO_INCREMENT for table `sks`
 --
 ALTER TABLE `sks`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
