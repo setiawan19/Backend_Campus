@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2019 at 08:18 PM
+-- Generation Time: Jul 18, 2019 at 10:42 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -114,21 +114,16 @@ CREATE TABLE `sks` (
   `semester` int(2) DEFAULT NULL,
   `tahun` int(4) DEFAULT NULL,
   `sisa_sks` int(3) DEFAULT NULL,
-  `target_wisuda` varchar(30) DEFAULT NULL
+  `target_wisuda` varchar(30) DEFAULT NULL,
+  `status_mhs` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sks`
 --
 
-INSERT INTO `sks` (`id`, `nim`, `sks_lulus`, `ips`, `ipk`, `semester`, `tahun`, `sisa_sks`, `target_wisuda`) VALUES
-(2, 20191011, 24, 4, 4, 1, 2018, 106, '5 semester'),
-(52, 20191011, 24, 3.54, 3.77, 2, 2019, 82, 'Target Wisuda 4 Semester lagi'),
-(53, 20191011, 10, 1.59, 3.04, 3, 2019, 72, 'Target Wisuda 4 Semester lagi'),
-(54, 20191011, 23, 3.45, 3.15, 4, 2019, 49, 'Target Wisuda 3 Semester lagi'),
-(55, 20191055, 24, 4, 4, 1, 2019, 116, 'Target Wisuda 5 Semester lagi'),
-(56, 20191011, 24, 3.25, 3.17, 5, 2019, 25, 'Target Wisuda 2 Semester lagi'),
-(57, 20191011, 25, 4, 3.31, 6, 2019, 0, 'Selamat Anda Lulus');
+INSERT INTO `sks` (`id`, `nim`, `sks_lulus`, `ips`, `ipk`, `semester`, `tahun`, `sisa_sks`, `target_wisuda`, `status_mhs`) VALUES
+(63, 20191055, 24, 4, 4, 1, 2019, NULL, 'Lulus Tidak Tepat Waktu', 'Aktif');
 
 -- --------------------------------------------------------
 
@@ -202,7 +197,7 @@ ALTER TABLE `prodi`
 -- AUTO_INCREMENT for table `sks`
 --
 ALTER TABLE `sks`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
