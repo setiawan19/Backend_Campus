@@ -419,6 +419,7 @@ app.get("/view_sks", (req, res) => {
                 WHERE sks.nim = mahasiswa.nim 
                 AND mahasiswa.id_prodi = prodi.id
                 AND prodi.id_fk = fakultas.id
+                GROUP BY sks.nim
                 `;
   db.query(sql, (err, result) => {
     if (err) {
@@ -433,7 +434,7 @@ app.get("/view_sks/:nim", (req, res) => {
   var sql = `SELECT sks.nim, mahasiswa.nama AS nama, 
                 sks.sks_lulus, sks.ips, 
                 sks.ipk, sks.semester, sks.tahun, 
-                sks.sisa_sks, prodi.total_sks AS total_sks,
+                sks.sisa_sks, prodi.total_sks AS total_sks, sks.status_mhs AS status_mhs,
                 sks.target_wisuda, prodi.nama AS prodi, fakultas.nama AS fakultas  
                 FROM sks, mahasiswa JOIN prodi, fakultas  
                 WHERE sks.nim = ${req.params.nim}
@@ -449,6 +450,19 @@ app.get("/view_sks/:nim", (req, res) => {
   });
 });
 
+//delete data prediksi by id
+app.delete("/view_sks/:id", (req, res) => {
+  var sql = "DELETE FROM sks WHERE id = ?";
+  db.query(sql, req.params.id, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send({
+        status: `Data Prediksi by id Berhasil dihapus`
+      });
+    }
+  });
+});
 //select value column if semester value max
 app.get("/semester/:nim", (req, res) => {
   var sql = `SELECT * from sks WHERE sks.nim = ${
@@ -472,7 +486,8 @@ app.post("/view_sks", (req, res) => {
     semester: req.body.semester,
     tahun: req.body.tahun,
     sisa_sks: req.body.sisa_sks,
-    target_wisuda: req.body.target_wisuda
+    target_wisuda: req.body.target_wisuda,
+    status_mhs: req.body.status_mhs
   };
   var sql = `INSERT INTO sks SET ?`;
   db.query(sql, data, (err, result) => {
@@ -504,7 +519,8 @@ app.post("/view_sks/add/:nim", (req, res) => {
     semester: req.body.semester,
     tahun: req.body.tahun,
     sisa_sks: req.body.sisa_sks,
-    target_wisuda: req.body.target_wisuda
+    target_wisuda: req.body.target_wisuda,
+    status_mhs: req.body.status_mhs
   };
 
   var sql = `INSERT INTO sks SET ?`;
@@ -539,7 +555,8 @@ app.put("/view_sks/edit/:nim", (req, res) => {
     semester: req.body.semester,
     tahun: req.body.tahun,
     sisa_sks: req.body.sisa_sks,
-    target_wisuda: req.body.target_wisuda
+    target_wisuda: req.body.target_wisuda,
+    status_mhs: req.body.status_mhs
   };
   var sql = `UPDATE sks SET ? WHERE nim = ${req.params.nim}`;
   db.query(sql, data, (err, result) => {
